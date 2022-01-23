@@ -15,23 +15,34 @@
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
+
+           List<Integer> ans = new ArrayList<Integer>();
+           if(root==null) return ans;
         
+//         recursive solution
+//         ans.add(root.val);
+//         if(root.left!=null){
+//             ans.addAll(preorderTraversal(root.left));
+//         }
+//         if(root.right!=null) {
+//             ans.addAll(preorderTraversal(root.right));
+//         }
+          
         
+//         iterative
         
-        
-        List<Integer> ans = new ArrayList<Integer>();
-        if(root==null) return ans;
-        ans.add(root.val);
-        if(root.left!=null){
-            ans.addAll(preorderTraversal(root.left));
+        Stack<TreeNode> stack = new Stack<TreeNode>();      
+        TreeNode current = root;
+        while(current!=null || !stack.isEmpty()){
+            if(current!=null) ans.add(current.val);
+           
+            
+            if(current.right!=null) {stack.push(current.right);}
+            current = current.left;
+            if(current==null && !stack.isEmpty()) {current = stack.pop();}
         }
-        if(root.right!=null) {
-            ans.addAll(preorderTraversal(root.right));
-        }
-        
-        
-        return ans;
-        
-        
+         return ans;
     }
+       
+
 }
