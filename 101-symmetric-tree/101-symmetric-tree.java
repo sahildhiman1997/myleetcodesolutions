@@ -15,40 +15,30 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
- 
-//         Iterative using stack
-        
-        
-        
-        Stack<TreeNode> left = new Stack();
-        Stack<TreeNode> right = new Stack();
-        if(root == null) return true;
+        if(root == null)   return true;
+        return helper(root.left, root.right);
+    }
     
-        if(root.left!=null)        left.add(root.left);
-        if(root.right!=null)        right.add(root.right);
+    
+    
+    boolean helper(TreeNode l, TreeNode r){
+        if(l==null && r==null) return true;
+        if(l==null || r==null) return false;
         
-        while(!left.isEmpty() || !right.isEmpty()){ 
-            if((left.isEmpty() && !right.isEmpty()) || (!left.isEmpty() && right.isEmpty())){
-                return false;
-            }
+        if(l.val!=r.val) return false;
             
-            TreeNode l  = left.pop();
-            TreeNode r  = right.pop();
-            
-            if(l.val == r.val){ 
-                if(l.left!=null && r.right!=null) { left.push(l.left); right.push(r.right);}
-                if(l.right!=null && r.left!=null) { right.push(r.left); left.push(l.right);}
-         
-                if((l.left==null && r.right!=null) || (l.left!=null && r.right==null)) return false;
-                          if((l.right==null && r.left!=null) || (l.right!=null && r.left==null)) return false;
-                
-                
-            }else{
-                return false;
-            }
+        boolean l1=true, l2=true;
+        
+        if(l.left!=null || r.right!=null){
+            l1 = helper(l.left, r.right);
+        }
+        if(l.right!=null || r.left!=null){
+            l2  = helper(l.right, r.left);
         }
         
-        
+        if(l1==false || l2 == false){
+            return false;
+        }
         return true;
     }
 }
