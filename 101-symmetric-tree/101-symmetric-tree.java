@@ -16,29 +16,17 @@
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         if(root == null)   return true;
-        return helper(root.left, root.right);
-    }
+        return isSymmetricHelper(root.left, root.right);
+    }    
     
-    
-    
-    boolean helper(TreeNode l, TreeNode r){
+    boolean isSymmetricHelper(TreeNode l, TreeNode r){
         if(l==null && r==null) return true;
         if(l==null || r==null) return false;
         
         if(l.val!=r.val) return false;
             
         boolean l1=true, l2=true;
-        
-        if(l.left!=null || r.right!=null){
-            l1 = helper(l.left, r.right);
-        }
-        if(l.right!=null || r.left!=null){
-            l2  = helper(l.right, r.left);
-        }
-        
-        if(l1==false || l2 == false){
-            return false;
-        }
-        return true;
+
+        return isSymmetricHelper(l.left, r.right) && isSymmetricHelper(l.right, r.left);
     }
 }
