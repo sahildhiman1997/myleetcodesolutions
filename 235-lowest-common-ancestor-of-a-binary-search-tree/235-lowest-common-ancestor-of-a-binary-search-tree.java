@@ -13,17 +13,18 @@ class Solution {
 
 
         TreeNode ans = root;
-        if(root ==q || root == p) return root;
+       
         
         while(true){
+             if(root ==q || root == p) return root;
             if(p.val<=root.val && q.val<=root.val){
                 ans =root.left;
                 root = root.left;
-                if(root == p || root ==q) break;
+                
             }else if(p.val>=root.val && q.val >=root.val){
                 ans = root.right;
                 root = root.right;
-                if(root == p || root ==q) break;
+               
             }else{
                 break;
             }
