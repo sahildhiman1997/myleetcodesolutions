@@ -1,49 +1,48 @@
 class Solution {
     public int[][] updateMatrix(int[][] mat) {
-        if (mat == null || mat.length == 0 || mat[0].length == 0) {
-            return mat;
-        }
-
-        int rows = mat.length;
-        int cols = mat[0].length;
-        if (rows == 1 && cols == 1) {
-            return mat;
-        }
-
-        int[][] result = new int[rows][cols];
-        // (rows + cols - 1) is the maximum possible distance in the matrix. Its the
-        // distance been two diagonally opposite corners.
-        int maxDistance = rows + cols;
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (mat[i][j] == 0) {
-                    continue;
-                }
-                result[i][j] = maxDistance;
-                if (i > 0) {
-                    result[i][j] = Math.min(result[i][j], result[i - 1][j] + 1);
-                }
-                if (j > 0) {
-                    result[i][j] = Math.min(result[i][j], result[i][j - 1] + 1);
-                }
+        for(int r=0;r<mat.length;r++){
+            for(int c=0;c<mat[0].length;c++){
+           
+                
+               if(mat[r][c]!=0){
+                    mat[r][c] = mat.length+mat[0].length;
+                   if(r==0 &&c>0) {
+                       mat[r][c]= mat[r][c-1]+1;
+                   }
+                   
+                   if(r>0){
+                        mat[r][c]=mat[r-1][c]+1;
+                        if(c>0){
+                            mat[r][c]= Math.min(mat[r][c], mat[r][c-1]+1);
+                        }   
+                    }
+               }
             }
         }
+            
+        for(int r = mat.length-1;r>-1;r--){
+            for(int c = mat[0].length - 1;c>-1;c--){
+           
+                
+                
+                 if(mat[r][c]!=0){
+                     
+                     
+                     if(r==mat.length-1 && c<mat[0].length-1){
+                          mat[r][c]= Math.min(mat[r][c], mat[r][c+1]+1);
+                     }
+                     
+                    if(r<mat.length-1){
+                        mat[r][c]= Math.min(mat[r][c], mat[r+1][c]+1);
+                    }   
+                    if(c<mat[0].length-1){
+                        mat[r][c]= Math.min(mat[r][c], mat[r][c+1]+1);
+                    }   
+               }
 
-        for (int i = rows - 1; i >= 0; i--) {
-            for (int j = cols - 1; j >= 0; j--) {
-                if (mat[i][j] == 0) {
-                    continue;
-                }
-                if (i < rows - 1) {
-                    result[i][j] = Math.min(result[i][j], result[i + 1][j] + 1);
-                }
-                if (j < cols - 1) {
-                    result[i][j] = Math.min(result[i][j], result[i][j + 1] + 1);
-                }
-            }
         }
-
-        return result;
+        }
+        return mat;
     }
 }
+   
