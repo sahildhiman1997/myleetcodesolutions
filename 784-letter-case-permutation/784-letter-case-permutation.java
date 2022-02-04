@@ -6,7 +6,7 @@ class Solution {
         for(int pos = 0;pos<s.length();pos++){
             
             if(Character.isAlphabetic(s.charAt(pos))){
-                System.out.println("char found " +s.charAt(pos));
+                // System.out.println("char found " +s.charAt(pos));
                 int size = ans.size();
                 
                 //for each string in the answer list, add the opposite case of the current alphabet 
