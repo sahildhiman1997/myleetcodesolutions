@@ -12,9 +12,9 @@ class Solution {
             }
             // System.out.println("start is "+start+", end is "+end+" at "+i);
          
-            if(start<=values[i]+i  && i<values.length-1){
+            if(start<=values[i]+i ){
                 start=values[i]+i;
-                end = values[i+1]-i-1;
+                end = Integer.MIN_VALUE;
             }
             
         }
