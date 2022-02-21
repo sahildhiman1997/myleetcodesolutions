@@ -3,9 +3,9 @@ class Solution {
         int low = 0;
         int high=nums.length;
         
-        
+        int current = (low+high)/2;
         while(high>low){
-                int current = (low+high)/2;
+                 current = (low+high)/2;
             if(target==nums[current]) return current;
             else if(target<nums[current]){
                 high = current;
