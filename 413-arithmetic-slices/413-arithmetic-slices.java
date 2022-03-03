@@ -7,21 +7,13 @@ class Solution {
         for(int i = 2;i<nums.length;i++){
             if(nums[i]-nums[i-1]==nums[i-1]-nums[i-2]){
                 count++;
-            }else{
-                
-//                 calculate how many APs in this..
-                // then make count 0 again
-                for(int t = 1;t<=count;t++){
-                    ans+=t;
-                    
-                }
+            }
+            else{
+                ans+= count*(count+1)/2;
                 count = 0;
             }
         }
-         for(int t = 1;t<=count;t++){
-                    ans+=t;
-                    
-                }
+        ans+= count*(count+1)/2;
         return ans;
     }
 }
