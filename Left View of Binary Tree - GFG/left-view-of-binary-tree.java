@@ -135,9 +135,9 @@ class Tree
        row1.add(root);
        
          while(row1.size()>0){
-           if(row1.get(0)!=null){
+  
            ans.add(row1.get(0).data);
-           }
+ 
             for(Node n: row1){
                 if(n.left!=null) row2.add(n.left);
                 if(n.right!=null) row2.add(n.right);
