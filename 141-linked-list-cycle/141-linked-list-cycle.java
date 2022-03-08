@@ -18,10 +18,10 @@ public class Solution {
         if(head == null || head.next == null){
             return false;
         }
+        if(head.next.next==null) return false;
         
         
-        
-        while(tortoise!=null){
+        do{
 
             
             if(rabbit.next!=null && rabbit.next.next!=null){
@@ -31,13 +31,11 @@ public class Solution {
                 return false;
             }
             
-            if(tortoise ==rabbit){
-                return true;
-            }
+       
         
-        }
+        }while(tortoise!=rabbit);
         
-        return false;
+        return true;
         
         
         
