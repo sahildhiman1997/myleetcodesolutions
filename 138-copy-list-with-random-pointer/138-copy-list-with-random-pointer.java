@@ -47,7 +47,6 @@ class Solution {
         current = head;
         
         while(current!=null){
-            System.out.println(current.val+", is the value at current, and next is"+current.next.val);
             Node copy = current.next;
             Node n = copy.next;
             
