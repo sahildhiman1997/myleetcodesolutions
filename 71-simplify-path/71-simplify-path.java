@@ -20,7 +20,6 @@ class Solution {
         
         while(!stack.isEmpty()){
             String k = stack.pop();
-            System.out.println(k);
             ans.insert(0,"/"+k);
         }
         
