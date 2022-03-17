@@ -16,11 +16,12 @@ class Solution {
                 if(count ==0){
                     if(i-start == 1){
                         ans++;
-                        start=i+1;
+                        
                     }else{
                     ans+=2*helper(s, start+1, i);
-                        start=i+1;
+                        
                     }
+                    start=i+1;
                 }
             }
         }
