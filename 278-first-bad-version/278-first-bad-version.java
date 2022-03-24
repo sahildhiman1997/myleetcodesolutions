@@ -3,25 +3,19 @@
 
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
-        
-        int low = 1;
-        int high = n;
-        int bad =  n;
-        while(low<=high){
-            int mid = low+(high-low)/2;
-            if(isBadVersion(mid)==true){
-                if(mid==0 || isBadVersion(mid-1)==false){
-                return mid;
-                }
-                high= mid-1;
-                bad = mid;
-                
+        int start = 1;
+        int end = n;
+        int current = 0;
+        while(start!=end){
+            current = start + (end-start)/2;
+            System.out.println(current);
+            if(isBadVersion(current)){
+                end = current;
             }else{
-                low=mid+1;
+                start = current+1;
             }
-
         }
-        return bad;
-        
+        return (start+(end-start)/2);
+            
     }
 }
