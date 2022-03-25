@@ -10,14 +10,20 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        ListNode tortoise = head;
         ListNode rabbit = head;
+        ListNode tortoise = head;
+        
         while(rabbit.next!=null){
-            tortoise=tortoise.next;
-            if(rabbit.next!=null) rabbit = rabbit.next;
-            if(rabbit.next!=null) rabbit = rabbit.next;
+            tortoise = tortoise.next;
+           rabbit = rabbit.next;
+            
+            if(rabbit.next!=null){
+                rabbit = rabbit.next;
+            }else{
+                return tortoise;
+            }
+
         }
         return tortoise;
-        
     }
 }
