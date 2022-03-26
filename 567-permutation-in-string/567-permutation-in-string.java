@@ -18,6 +18,9 @@ class Solution {
                 char temp = s2.charAt(j);
                 j = j-i+1;
                 i=0;
+                while(s2.charAt(j)!=temp){
+                    j++;
+                }
             }
             
             if(i==s1.length()){
