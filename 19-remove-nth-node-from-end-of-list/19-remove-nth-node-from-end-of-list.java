@@ -10,50 +10,38 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if(head ==null) return null;
+        if(head == null) return null;
+        
+        ListNode previousStart = head;
+        ListNode start = head;
         ListNode current = head;
-        int i = 1;
-        
-        
-        
-        ListNode currentChunkStarting=head;;
-        ListNode previousChunkStarting = head;
-        
-        while(current.next!=null){
-            current = current.next;
+        int i = 0;
+        while(current!=null){
+            
             i++;
+            
             if(i==n+1){
-                i = 1;
-                previousChunkStarting=currentChunkStarting;
-                currentChunkStarting =current ;
-                System.out.println("Current chunk starting at: "+currentChunkStarting.val);
-                
+               
+                i=1;
+                previousStart = start;
+                start = current;
             }
+            System.out.println(current.val+" at i: "+i+"previousStart is: "+previousStart.val+", start is: "+start.val);
+            current = current.next;
         }
         
-        if(previousChunkStarting==currentChunkStarting) return head.next;
+        if(previousStart== start) return head.next;
         
-       
-//        int coveredBycurrentChunk = i;
-        // n=n-i;
-    
-           System.out.println("at previous ");
-           while(i>1){
-               previousChunkStarting=previousChunkStarting.next;
-               i--;
-           }
-           previousChunkStarting.next = previousChunkStarting.next.next;
-       
         
-       // while(n>1){
-       //     currentChunkStarting=currentChunkStarting.next;
-       //     n--;
-       // }
+//         int toCover = n-i;
         
-       // currentChunkStarting.next = currentChunkStarting.next.next;
-        
+//         for(i = 0;i<toCover-1;i++){
+//             previousStart = previousStart.next;
+//         }
+        for(int j = 0;j<i-1;j++){
+              previousStart = previousStart.next;
+        }
+        previousStart.next = previousStart.next.next;
         return head;
-        
     }
-   
 }
