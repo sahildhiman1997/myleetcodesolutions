@@ -23,21 +23,27 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        if(root==null) return null;
-       if(root.left!=null && root.right!=null){
-        link(root.left,root.right);
-       }
+        if(root == null) return null;
+        
+        List<Node> list1 = new ArrayList();
+        List<Node> list2 = new ArrayList();
+        
+        list1.add(root);
+       
+        while(!list1.isEmpty()){
+            for(int i = 0;i<list1.size()-1;i++){
+                list1.get(i).next = list1.get(i+1);
+                if(list1.get(i).left!=null) list2.add(list1.get(i).left);
+                if(list1.get(i).right!=null) list2.add(list1.get(i).right);
+            }
+            int i = list1.size()-1;
+            list1.get(list1.size()-1).next = null;
+            if(list1.get(i).right!=null) list2.add(list1.get(list1.size()-1).left);
+            if(list1.get(i).right!=null) list2.add(list1.get(list1.size()-1).right);
+            
+            list1 = list2;
+            list2 = new ArrayList();
+        }
         return root;
     }
-    
-    void link(Node left, Node right){
-        if(left==null && right ==null) return ;
-        left.next = right;
-        link(left.left, left.right);
-        link(right.left, right.right);
-        link(left.right, right.left);
-        
-    }
 }
-
-    
