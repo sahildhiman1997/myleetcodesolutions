@@ -1,73 +1,60 @@
-
 class Solution {
-    static class Position{
-    int x;
-    int y;
-    Position(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-}
-    
     public int orangesRotting(int[][] grid) {
-        Queue<Position> rotten = new ArrayDeque<Position>();
-        int total = 0;
-        int ans = -1;
-        int totalrottenCount=0;
-        
-//         Let's gather all the tomatoes first ( oranges don't rotten that fast)
-        for(int r= 0;r<grid.length;r++){
-            for(int c = 0;c<grid[0].length;c++){
-                if(grid[r][c]==2){
-                    rotten.add(new Position(r,c));
-                    totalrottenCount++;
+//         count total oranges, and note positions of rootne oranges
+        int totalTomatoes = 0;
+        int rottenTomatoes = 0;
+        PriorityQueue<Integer[]> queue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        for(int i = 0;i<grid.length;i++){
+            for(int j = 0;j<grid[0].length;j++){
+                if(grid[i][j]!=0){
+                    totalTomatoes++;
+                    if(grid[i][j]==2){
+                        queue.offer(new Integer[]{0,i,j});
+                                                rottenTomatoes++;
+                    }
                 }
-                if(grid[r][c]!=0) total++;
-                 
             }
         }
+        if(totalTomatoes==0) return 0;
+        if(rottenTomatoes==0) return -1;
         
-        if(totalrottenCount==total) return 0;
-       
-//         for clarity
-        System.out.println(totalrottenCount +" are rotten initially out of "+total);
-         // totalrottenCount = 0;
-        while(!rotten.isEmpty()){
-            System.out.println("total rotten: "+rotten.size());
-            int countThisMinute = rotten.size();
-            while(countThisMinute>0){
-                Position p = rotten.poll();
-                
-                if(grid[p.x][p.y]==1){
-                    grid[p.x][p.y]=2;
-                    totalrottenCount++;
-                }
-                
-                if(p.x<grid.length-1 && grid[p.x +1][p.y]==1){
-                    rotten.add(new Position(p.x+1, p.y));
-                }
-                if(p.x>0 && grid[p.x-1][p.y]==1){
-                    rotten.add(new Position(p.x-1, p.y));
-                }
-                
-                if(p.y<grid[0].length-1 && grid[p.x][p.y+1]==1){
-                    rotten.add(new Position(p.x, p.y+1));
-                }
-                if(p.y>0 && grid[p.x][p.y-1]==1){
-                    rotten.add(new Position(p.x, p.y-1));
-                }
-                
-                countThisMinute--;
-            }
-          
-            ans++;
-            if(total == totalrottenCount) return ans;
+        rottenTomatoes=0;
+        
+        Integer[] current = new Integer[3];
+        
+        while(queue.isEmpty()==false){
+            System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
+            current = queue.poll();
+            rottenTomatoes++;
+            int minute = current[0];
+            int i = current[1];
+            int j = current[2];
             
-            System.out.println(totalrottenCount +" are rotten  out of "+total+"at stage"+ans);
+            
+//             left
+            if(i>0 && grid[i-1][j]==1) {
+                queue.offer(new Integer[] {minute+1, i-1,j});
+                grid[i-1][j]=2;  
+            }
+//             right
+            if(i<grid.length-1 && grid[i+1][j]==1) {
+                queue.offer(new Integer[] {minute+1, i+1,j});
+             grid[i+1][j]=2;   
+            }
+            
+//             up
+            if(j>0 && grid[i][j-1]==1){
+              queue.offer(new Integer[] {minute+1, i,j-1});
+                grid[i][j-1]=2;
+            } 
+//             down
+            if(j<grid[0].length-1 && grid[i][j+1]==1) {
+                queue.offer(new Integer[] {minute+1, i,j+1});
+                   grid[i][j+1]=2;
+            }
         }
-        System.out.println("finally, "+totalrottenCount +" are rotten finaly out of "+total);
-        if(total != totalrottenCount) return -1;
-        
-        return ans;
+        System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
+        if(rottenTomatoes==totalTomatoes)  return current[0];
+        return -1;
     }
 }
