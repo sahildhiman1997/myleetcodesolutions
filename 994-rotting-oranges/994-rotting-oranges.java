@@ -23,7 +23,7 @@ class Solution {
         Integer[] current = new Integer[3];
         
         while(queue.isEmpty()==false){
-            System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
+            // System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
             current = queue.poll();
             rottenTomatoes++;
             int minute = current[0];
@@ -53,7 +53,7 @@ class Solution {
                    grid[i][j+1]=2;
             }
         }
-        System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
+        // System.out.println("rottenTomatoes:" +rottenTomatoes+  "totalTomatoes: "+totalTomatoes);
         if(rottenTomatoes==totalTomatoes)  return current[0];
         return -1;
     }
