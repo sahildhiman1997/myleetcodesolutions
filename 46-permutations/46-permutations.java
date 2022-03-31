@@ -23,9 +23,6 @@ class Solution {
                 ans.get(nthList).add(i);
                 
             }
-            
-            
-            
         }
         
         
