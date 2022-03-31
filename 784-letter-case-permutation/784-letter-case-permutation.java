@@ -1,34 +1,41 @@
 class Solution {
     public List<String> letterCasePermutation(String s) {
         List<String> ans = new ArrayList();
-        
         ans.add(s);
+        
         for(int pos = 0;pos<s.length();pos++){
-            
-            if(Character.isAlphabetic(s.charAt(pos))){
-                // System.out.println("char found " +s.charAt(pos));
-                int size = ans.size();
+            char c = s.charAt(pos);
+            if(Character.isAlphabetic(c)){
+                if(Character.isUpperCase(c)){
+                    c = Character.toLowerCase(c);
+                }else{
+                    c= Character.toUpperCase(c);
+                }
                 
-                //for each string in the answer list, add the opposite case of the current alphabet 
-                for(int i = 0;i<size;i++){
-                    s = ans.get(i);
-                    StringBuilder str = new StringBuilder("");
-                        for(int c = 0;c<s.length();c++){
-                            if(pos==c){
-                                    if(Character.isUpperCase(s.charAt(pos))){
-                                    str.append(Character.toLowerCase(s.charAt(c)));
-                                }else{
-                                    str.append(Character.toUpperCase(s.charAt(c)));
-                                }
-                                continue;
-                            }
-                            str.append(s.charAt(c));
-                        }
-                    ans.add(str.toString());
-                            
-                 }
+                
+                
+                int ansSize = ans.size();
+                for(int count = 0;count<ansSize;count++){
+                    StringBuilder tempString = new StringBuilder("");
+                    String original = ans.get(count);
+                    
+                    for(int i = 0;i<pos;i++){
+                        tempString.append(original.charAt(i));
+                    }
+                    tempString.append(c);
+                    for(int i = pos+1;i<s.length();i++){
+                        tempString.append(original.charAt(i));
+                    }
+                    ans.add(tempString.toString());
+                }
+                    
+                
+               
             }
         }
         return ans;
+        
+        
+        
     }
 }
