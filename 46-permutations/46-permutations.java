@@ -20,7 +20,7 @@ class Solution {
                     
                     ans.add(l2);
                 }
-                ans.get(nthList).add(i);
+                l1.add(i);
                 
             }
         }
