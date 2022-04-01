@@ -1,32 +1,16 @@
 class Solution {
     public int climbStairs(int n) {
-        if(n<4) return n;
- 
-        // Pure recursion, TLE error.
-        // return climbStairs(n-1)+climbStairs(n-2);
+        if(n<3) return n;
         
-        // Using additional space.
-        // if(n<4) return n;
-        // int[] ans = new int[n];
-        // ans[1]=1;
-        // ans[2]=2;
-        // for(int i=3;i<n;i++){
-        //     ans[i]=ans[i-1]+ans[i-2];
-        // }
-        // return ans[n-1]+ans[n-2];
+        int last = 2;
+        int secondLast = 1;
         
-        
-//         can we reduce the space complexity more ?
-        int a = 1;
-        int b = 1;
-        for(int i=3;i<=n;i++){
-            int temp = a;
-            a=b;
-            b+=temp;
+        int temp = 0;
+        for(int i =3;i<=n;i++){
+            temp = last+secondLast;
+            secondLast = last;
+            last = temp;
         }
-        return a+b;
-        
-        
-        
+        return last;
     }
 }
