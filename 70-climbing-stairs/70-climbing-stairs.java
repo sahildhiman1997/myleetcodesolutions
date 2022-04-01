@@ -5,9 +5,8 @@ class Solution {
         int last = 2;
         int secondLast = 1;
         
-        int temp = 0;
         for(int i =3;i<=n;i++){
-            temp = last+secondLast;
+            int temp = last+secondLast;
             secondLast = last;
             last = temp;
         }
